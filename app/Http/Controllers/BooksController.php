@@ -44,7 +44,7 @@ class BooksController extends Controller
         $newNameImage = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads'), $newNameImage);
 
-        $books = new Books;
+        $books = new Books();
 
         $books->title = $request->input('title');
         $books->summary = $request->input('summary');

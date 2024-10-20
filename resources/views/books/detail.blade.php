@@ -15,6 +15,24 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ $books->title }}</h2>
                     <p class="card-text">{{ $books->summary }}</p>
+                    <p><strong>Stock:</strong> {{ $books->stock }}</p>
+                    <p><strong>Kategori:</strong> {{ optional($books->category)->name ?? 'Kategori tidak tersedia' }}</p>
+                    <!-- Form untuk Peminjaman Buku -->
+                    <form action="{{ route('loan.store', $books->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="tanggal_peminjaman">Tanggal Peminjaman</label>
+                            <input type="date" name="tanggal_peminjaman" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">Pinjam Buku</button>
+                    </form>
+                    
+                    <!-- Jika ada pesan sukses -->
+                    @if(session('success'))
+                        <div class="alert alert-success mt-3">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
